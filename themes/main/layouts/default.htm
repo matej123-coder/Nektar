@@ -1,14 +1,30 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nektar</title>
+    <link rel="stylesheet" href="{{'assets/css/style.css'| theme }}">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollSmoother.min.js"></script>
+    <script type="module" src="{{'assets/js/script.js'| theme }}"></script>
+
 </head>
+
 <body>
-    {% partial 'site/nav-bar'%}
-    <main class="main-content" role="main">
-        {% page %}
-    </main>
-    {% partial 'site/footer' %}
+    <div id="wrapper">
+        <div id="content">
+            {% partial 'site/nav-bar'%}
+
+            <main class="main-content" role="main">
+                {% page %}
+            </main>
+
+            {% partial 'site/footer' %}
+        </div>
+    </div>
+
 </body>
+
 </html>

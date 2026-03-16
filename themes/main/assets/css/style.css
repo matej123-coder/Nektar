@@ -1,0 +1,63 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+:root{
+    --page-padding: 0.625rem;
+    --grid-gutter: 0.625rem;
+    --border-radius: 3px;
+    --header-height: 3rem;
+    --font-size-xxs: 0.625rem;
+    --font-size-xs: 0.875rem;
+    --font-size-s: 1.125rem;
+    --font-size-m: 1.75rem;
+    --font-size-l: 2.5rem;
+    --font-size-xl: 3.75rem;
+    --font-size-xxl: 5rem;
+    --font-family-default: "Monument Grotesk", Arial, Helvetica, sans-serif;
+    --font-family-title: "Gravity", Arial, Helvetica, sans-serif;
+    --color-black: #000;
+    --color-white: #fff;
+    --color-gray: #e7e8eb;
+    --color-gray-dark: #1c1c1c;
+    --color-accent: #001eff;
+    --bezier-ease: cubic-bezier(0.28, 0.76, 0.44, 0.96);
+    --vh-100: 911px;
+}
+html{
+    scroll-behavior: smooth;
+}
+body{
+    font-family: var(--font-family-default);
+    font-size: var(--font-size-s);
+    line-height: 1.1;
+    color: var(--color-black);
+    background-color: var(--color-gray);
+    min-height: var(--vh-100);
+    display: flex;
+    flex-direction: column;
+}
+::-webkit-scrollbar{
+    width: 10px;
+    background-color: transparent;
+}
+::-webkit-scrollbar-thumb{
+    background-color: black;
+    opacity: 0.7;
+    border-radius: 100px;
+}
+@font-face {
+    font-family: "Monument Grotesk";
+    src: url("../fonts/ABCMonumentGroteskSemiMono-Regular-Trial.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Gravity";
+    src: url("../fonts/Gravity-Regular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
