@@ -6,6 +6,6 @@ document.addEventListener("DOMContentLoaded",()=>{
     wrapper:"#wrapper",
     content:"#content",
     smooth:2,
-    smoothTouch:0.2,
+    smoothTouch:0.2,    
    })
 })
