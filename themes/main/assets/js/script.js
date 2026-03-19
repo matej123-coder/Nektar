@@ -29,5 +29,5 @@ document.addEventListener("DOMContentLoaded",()=>{
             overlay.classList.remove("active");
         });
     });
-    let color="red";
+    
 })
