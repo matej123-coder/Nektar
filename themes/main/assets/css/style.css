@@ -88,10 +88,10 @@ body{
     margin: 0 !important;
 }
 .navbar .container-fluid {
-    position: relative !important; /* THIS is the anchor */
+    position: relative !important; 
     display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important; /* was flex-start, that was stretching it */
+    justify-content: space-between;
+    align-items: center !important; 
     padding: 0px 10px !important;
     margin: 0 !important;
 }
@@ -106,8 +106,13 @@ body{
     align-items: center;  
     padding: 30px 20px; 
     border-radius: 5px;
+    width: 50px;
     z-index: 9999;
-
+}
+.main-link{
+    display: grid;
+    
+    justify-items: end;
 }
 .hamburger-menu{
     display: block;
@@ -118,7 +123,6 @@ body{
     transform-origin: center;
     transition: all 0.3s ease;
 }
-
 
 .dropdown-toggle::after{
     display: none;
@@ -131,34 +135,40 @@ body{
 }
 .navbar-nav{
     position: absolute;
-    right: 10;
+    right: 0;
     top: 0;
+    padding:8px 10px;
     z-index: 2;
 }
 
-.dropdown-menu.show {
-    position: relative;
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    opacity: 1;
     display: flex !important;
     flex-direction: column;
     gap: 2px;
     background-color: transparent;
-    border: none;
-    width: max-content;
     z-index: 9999;
-}
-
-.dropdown-menu li{
+    border:none;
    
+    pointer-events: none;
+}
+.dropdown-menu li{
+   opacity: 0;
+    transform: translateY(20px);
    background-color: var(--color-white);
    display: flex;
    align-items: center;
    list-style: none;
    border-radius: 10px;
    overflow: hidden;
- 
+    min-width: 285px;
+    width: min(600px,90vw);
 }
 .dropdown-menu li a{ 
-    width: min(600px,90vw);
+    
     position: relative  ;
     font-weight: 700;
     text-decoration: none;
@@ -166,7 +176,7 @@ body{
     height: 6.5rem;
     display: flex;
     padding: 10px 30px;
-    min-width: 280px;
+   
     
 }
 

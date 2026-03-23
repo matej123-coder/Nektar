@@ -1,4 +1,5 @@
 
+
 document.addEventListener("DOMContentLoaded",()=>{
     
     gsap.registerPlugin(ScrollTrigger,ScrollSmoother);
@@ -8,26 +9,54 @@ document.addEventListener("DOMContentLoaded",()=>{
     smooth:2,
     smoothTouch:0.2,    
    })
-    const navTrigger = document.querySelector(".dropdown-toggle");
+    const trigger = document.querySelector(".trigger");
     const overlay = document.querySelector(".overlay");
-    const dropdown = document.querySelector(".dropdown");
-   
-    
-    dropdown.addEventListener("show.bs.dropdown", () => {
-        navTrigger.classList.add("nav-open");
-        overlay.classList.add("active");
+    const dropdownMenu = document.querySelector(".dropdown-menu");
+    const items = document.querySelectorAll(".dropdown-menu li");
+    let isOpen = false;
+    const menuItems = document.querySelector(".menu-items")
+    let tl = gsap.timeline({paused:true});
+    tl.to(menuItems , {
+        width:"min(600px,90vw)",
+        minWidth:"285px",
+        duration: 0.2,
+        ease: "power2.out",
+        pointerEvents: "auto"
     });
 
-    dropdown.addEventListener("hide.bs.dropdown", () => {
-        navTrigger.classList.remove("nav-open");
+    tl.to(items, {
+        y: 0,
+        opacity: 1,
+        stagger: 0.08,
+        duration: 0.3,
+        ease: "power2.out"
+    }, "-=0.15");
+    function openMenu() {
+        trigger.classList.add("nav-open");
+        overlay.classList.add("active");
+        dropdownMenu.classList.add("show");
+        isOpen = true;
+        tl.play();
+    }
+
+    function closeMenu() {
+        trigger.classList.remove("nav-open");
         overlay.classList.remove("active");
+        dropdownMenu.classList.remove("show");
+        isOpen = false;
+        tl.reverse();
+    }
+
+    trigger.addEventListener("click", (e) => {
+        e.preventDefault();
+        isOpen ? closeMenu() : openMenu();
     });
-    
-    document.querySelectorAll(".dropdown-item").forEach(item => {
-        item.addEventListener("click", () => {
-            navTrigger.classList.remove("nav-open");
-            overlay.classList.remove("active");
-        });
+
+    overlay.addEventListener("click", closeMenu);
+
+    items.forEach(item => {
+        item.addEventListener("click", closeMenu);
     });
+
     
 })
