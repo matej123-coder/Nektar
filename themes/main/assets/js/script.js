@@ -9,17 +9,17 @@ document.addEventListener("DOMContentLoaded",()=>{
     smooth:2,
     smoothTouch:0.2,    
    })
-    const trigger = document.querySelector(".trigger");
+    const mainLink = document.querySelector(".main-link");
     const overlay = document.querySelector(".overlay");
     const dropdownMenu = document.querySelector(".dropdown-menu");
     const items = document.querySelectorAll(".dropdown-menu li");
     let isOpen = false;
-    const menuItems = document.querySelector(".menu-items")
+    const trigger = document.querySelector(".menu-items")
     let tl = gsap.timeline({paused:true});
-    tl.to(menuItems , {
+    tl.to(trigger , {
         width:"min(600px,90vw)",
         minWidth:"285px",
-        duration: 0.2,
+        duration: 0.15,
         ease: "power2.out",
         pointerEvents: "auto"
     });
@@ -28,11 +28,11 @@ document.addEventListener("DOMContentLoaded",()=>{
         y: 0,
         opacity: 1,
         stagger: 0.08,
-        duration: 0.3,
+        duration: 0.15,
         ease: "power2.out"
-    }, "-=0.15");
+    }, );
     function openMenu() {
-        trigger.classList.add("nav-open");
+        mainLink.classList.add("nav-open");
         overlay.classList.add("active");
         dropdownMenu.classList.add("show");
         isOpen = true;
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     }
 
     function closeMenu() {
-        trigger.classList.remove("nav-open");
+        mainLink.classList.remove("nav-open");
         overlay.classList.remove("active");
         dropdownMenu.classList.remove("show");
         isOpen = false;
@@ -54,9 +54,6 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     overlay.addEventListener("click", closeMenu);
 
-    items.forEach(item => {
-        item.addEventListener("click", closeMenu);
-    });
-
+   
     
 })
