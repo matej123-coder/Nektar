@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded",()=>{
     smooth:2,
     smoothTouch:0.2,    
    })
+  
+
     const mainLink = document.querySelector(".main-link");
     const overlay = document.querySelector(".overlay");
     const dropdownMenu = document.querySelector(".dropdown-menu");
@@ -54,6 +56,12 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     overlay.addEventListener("click", closeMenu);
 
-   
-    
+    const swiper = new Swiper('.swiper',   {
+             height: '100%',
+        navigation: {
+            nextEl: '.arrow-right',
+            prevEl: '.arrow-left',
+        },
+         effect: 'slide',
+    })    
 })
