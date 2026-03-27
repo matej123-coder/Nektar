@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-
+    window.scrollTo(0, 0)
     gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
     const smoother = ScrollSmoother.create({
         wrapper: "#wrapper",
@@ -8,13 +8,24 @@ document.addEventListener("DOMContentLoaded", () => {
         smoothTouch: 0.2,
 
     })
-
+   
 
     const mainLink = document.querySelector(".main-link");
     const overlay = document.querySelector(".overlay");
     const dropdownMenu = document.querySelector(".dropdown-menu");
     const items = document.querySelectorAll(".dropdown-menu li");
     let isOpen = false;
+    
+  
+    gsap.to('.home-intro-overlay', {
+        opacity: 0,
+        duration: 1,
+        ease: 'power2.inOut',
+        onComplete: () => {
+            document.querySelector('.home-intro-overlay').style.display = 'none';
+        }
+    }); 
+
     const trigger = document.querySelector(".menu-items")
     let tl = gsap.timeline({ paused: true });
     tl.to(trigger, {
@@ -111,9 +122,10 @@ document.addEventListener("DOMContentLoaded", () => {
     panelInners.forEach(inner => {
         getFaces(inner).forEach((face, i) => {
             gsap.set(face, {
-                rotateY: i === 0 ? 0 : 90,
+                zIndex: i === 0 ? 1 : 0,
                 transformOrigin: 'right center',
                 position: 'absolute',
+                rotateY: 0,
                 top: 0,
                 left: 0,
                 width: '100%',
@@ -136,9 +148,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         isAnimating = true;
 
-        const rotateOut = direction === 'next' ? -90 : 90;
-        const rotateIn = direction === 'next' ? 90 : -90;
-        const origin = direction === 'next' ? 'right center' : 'left center';
+        const rotateOut = direction === 'next' ? 90 : -90;
+        // const rotateIn = direction === 'next' ? 90 : -90;
+        const origin = direction === 'next' ? 'left center' : 'right center';
 
         const tl = gsap.timeline({
             onComplete: () => {
@@ -150,34 +162,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
         panelInners.forEach(inner => {
             const faces = getFaces(inner);
-            
-
+            faces.forEach((face, i) => {
+                gsap.set(face, { zIndex: 0, rotateY: 0 });
+            });
             const currentFace = faces[currentIndex];
             const nextFace = faces[nextIndex];
 
-            // update per panel
-            // Make sure next face starts in correct rotated position
-            gsap.set(nextFace, { rotateY: rotateIn, transformOrigin: origin, });
-            gsap.set(currentFace, { transformOrigin: origin })
-            // Play next video
-            const nextVid = nextFace.querySelector('video');
-            if (nextVid) nextVid.play();
+            const nextVid = nextFace.querySelector("video");
+            if (nextVid) {
+                nextVid.play();
+            }
+            gsap.set(nextFace, { zIndex: 1 });
+            gsap.set(currentFace, { zIndex: 2, rotateY: 0, transformOrigin: origin })
 
             tl.to(currentFace, {
                 rotateY: rotateOut,
-                duration: 0.5,
+                duration: 0.7,
                 ease: 'power2.inOut',
                 transformOrigin: origin,
-            }, 0)
-                .to(nextFace, {
-                    rotateY: 0,
-                    duration: 0.5,
-                    ease: 'power2.inOut',
-                    transformOrigin: origin,
-                    onComplete: () => {
-                        const oldVid = currentFace.querySelector('video');
-                    }
-                }, 0);
+                onComplete: () => {
+                    gsap.set(currentFace, { rotateY: 0, zIndex: 0 })
+
+                }
+            }, 0);
+            // .to(nextFace, {
+            //     rotateY: 0,
+            //     duration: 0.5,
+            //     ease: 'power2.inOut',
+            //     transformOrigin: origin,
+            //     onComplete: () => {
+            //         const oldVid = currentFace.querySelector('video');
+            //     }
+            // }, 0);
         });
     }
 
