@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const slideNumber = document.querySelector('.slide-number');
 
     function updateSlideNumber() {
-        slideNumber.textContent = `0${currentIndex+1}/0${totalSlides}`;
+        slideNumber.textContent = `0${currentIndex + 1}/0${totalSlides}`;
     }
 
     const panelInners = document.querySelectorAll('.panel-inner');
@@ -108,16 +108,16 @@ document.addEventListener("DOMContentLoaded", () => {
     function getFaces(panelInner) {
         return Array.from(panelInner.querySelectorAll('.panel-face'));
     }
-
-    // Init: hide all faces except index 0
     panelInners.forEach(inner => {
         getFaces(inner).forEach((face, i) => {
             gsap.set(face, {
                 rotateY: i === 0 ? 0 : 90,
                 transformOrigin: 'right center',
                 position: 'absolute',
-                top: 0, left: 0,
-                width: '100%', height: '100%'
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%'
             });
             if (i === 0) {
                 const vid = face.querySelector('video');
@@ -130,8 +130,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isAnimating) return;
 
         let nextIndex = direction === 'next' ? currentIndex + 1 : currentIndex - 1;
-        if (nextIndex < 0 ) nextIndex = totalSlides - 1;
-        else if (nextIndex >= totalSlides){
+        if (nextIndex < 0) nextIndex = totalSlides - 1;
+        else if (nextIndex >= totalSlides) {
             nextIndex = 0;
         }
         isAnimating = true;
@@ -150,12 +150,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         panelInners.forEach(inner => {
             const faces = getFaces(inner);
+            
+
             const currentFace = faces[currentIndex];
             const nextFace = faces[nextIndex];
 
+            // update per panel
             // Make sure next face starts in correct rotated position
-            gsap.set(nextFace, { rotateY: rotateIn, transformOrigin: origin });
-
+            gsap.set(nextFace, { rotateY: rotateIn, transformOrigin: origin, });
+            gsap.set(currentFace, { transformOrigin: origin })
             // Play next video
             const nextVid = nextFace.querySelector('video');
             if (nextVid) nextVid.play();
@@ -173,7 +176,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     transformOrigin: origin,
                     onComplete: () => {
                         const oldVid = currentFace.querySelector('video');
-                        if (oldVid) { oldVid.pause(); oldVid.currentTime = 0; }
                     }
                 }, 0);
         });
