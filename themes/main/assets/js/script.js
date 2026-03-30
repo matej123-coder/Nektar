@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-    window.scrollTo(0, 0)
+    const isHomePage = window.location.pathname==="/"
+
+    
     gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
     const smoother = ScrollSmoother.create({
         wrapper: "#wrapper",
@@ -15,9 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const dropdownMenu = document.querySelector(".dropdown-menu");
     const items = document.querySelectorAll(".dropdown-menu li");
     let isOpen = false;
-    
-  
-    gsap.to('.home-intro-overlay', {
+    const homeIntroOverlay = document.querySelector(".home-intro-overlay")
+    if(isHomePage){
+    window.scrollTo(0, 0);
+     gsap.to(homeIntroOverlay, {
         opacity: 0,
         duration: 1,
         ease: 'power2.inOut',
@@ -25,6 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
             document.querySelector('.home-intro-overlay').style.display = 'none';
         }
     }); 
+    }
+    else{
+        homeIntroOverlay.style.display="none"
+    }
 
     const trigger = document.querySelector(".menu-items")
     let tl = gsap.timeline({ paused: true });
