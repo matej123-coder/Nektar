@@ -1,7 +1,8 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const isHomePage = window.location.pathname==="/"
 
-    
+document.addEventListener("DOMContentLoaded", () => {
+    const isHomePage = window.location.pathname === "/"
+
+
     gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
     const smoother = ScrollSmoother.create({
         wrapper: "#wrapper",
@@ -10,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         smoothTouch: 0.2,
 
     })
-   
+
 
     const mainLink = document.querySelector(".main-link");
     const overlay = document.querySelector(".overlay");
@@ -18,19 +19,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const items = document.querySelectorAll(".dropdown-menu li");
     let isOpen = false;
     const homeIntroOverlay = document.querySelector(".home-intro-overlay")
-    if(isHomePage){
-    window.scrollTo(0, 0);
-     gsap.to(homeIntroOverlay, {
-        opacity: 0,
-        duration: 1,
-        ease: 'power2.inOut',
-        onComplete: () => {
-            document.querySelector('.home-intro-overlay').style.display = 'none';
-        }
-    }); 
+    if (isHomePage) {
+        window.scrollTo(0, 0);
+        gsap.to(homeIntroOverlay, {
+            opacity: 0,
+            duration: 1,
+            ease: 'power2.inOut',
+            onComplete: () => {
+                document.querySelector('.home-intro-overlay').style.display = 'none';
+            }
+        });
     }
-    else{
-        homeIntroOverlay.style.display="none"
+    else {
+        homeIntroOverlay.style.display = "none"
     }
 
     const trigger = document.querySelector(".menu-items")
@@ -192,15 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 }
             }, 0);
-            // .to(nextFace, {
-            //     rotateY: 0,
-            //     duration: 0.5,
-            //     ease: 'power2.inOut',
-            //     transformOrigin: origin,
-            //     onComplete: () => {
-            //         const oldVid = currentFace.querySelector('video');
-            //     }
-            // }, 0);
+
         });
     }
 
@@ -208,4 +201,26 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('prevBtn').addEventListener('click', () => flipPanels('prev'));
 
     updateSlideNumber();
+
+    const primaryHeaderSvg = document.querySelector(".primary-header svg");
+    const primaryHeader = document.querySelector(".primary-header")
+    const svgTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".primary-header",
+            start: "top bottom",
+            endTrigger:".svg-container" ,
+            end: "bottom bottom",
+            scrub: true,
+            markers: true,
+        }
+    });
+
+    svgTl
+        .fromTo(primaryHeaderSvg,
+            { scaleY: 0, transformOrigin: "top center" },
+            { scaleY: 4, transformOrigin: "top center", ease: "none", duration: 8 }
+        )
+        .to(primaryHeaderSvg,
+            { scaleY: 1, transformOrigin: "top center", ease: "none", duration: 1 }
+        );
 })

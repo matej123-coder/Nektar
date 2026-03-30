@@ -42,6 +42,7 @@
        
         position: relative;
         flex-direction: column;
+
     }
 
     ::-webkit-scrollbar {
@@ -504,29 +505,31 @@
         position: relative;
         min-height: 100vh;
     }
-    
+    .svg-container{
+        position: relative;
+        height: 100%;
+    }
     .primary-header{
         width: 100%;
-        height: calc(var(--vh-100)- var(--header-height));
+        height: auto;
         padding: var(--page-padding) var(--page-padding) var(--page-padding);
        position: relative;
-      
     }
     .primary-header h1{
         font-size: var(--font-size-xxl);
     }
+
     .primary-header svg{
         width: 100%;
         height: auto;
         opacity: 0.05;
         display: block;
         filter: invert(1);
+        
     }
     @media (max-width:700px) {
         .dropdown-menu li a {
-
             height: auto;
-
         }
 
         .nav-link-text {
