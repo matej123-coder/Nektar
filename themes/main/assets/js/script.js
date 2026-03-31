@@ -204,6 +204,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const primaryHeaderSvg = document.querySelector(".primary-header svg");
     const primaryHeader = document.querySelector(".primary-header")
+    const svgContainer = document.querySelector(".svg-container");
+
+    const targetScale = svgContainer.offsetHeight / primaryHeader.offsetHeight;
     const svgTl = gsap.timeline({
         scrollTrigger: {
             trigger: ".primary-header",
@@ -216,11 +219,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     svgTl
-        .fromTo(primaryHeaderSvg,
+        .fromTo(primaryHeader,
             { scaleY: 0, transformOrigin: "top center" },
-            { scaleY: 4, transformOrigin: "top center", ease: "none", duration: 8 }
+            { scaleY: targetScale, transformOrigin: "top center", ease: "none", duration: 20 }
         )
-        .to(primaryHeaderSvg,
-            { scaleY: 1, transformOrigin: "top center", ease: "none", duration: 1 }
+        .to(primaryHeader,
+            { scaleY: 1, transformOrigin: "bottom center", ease: "none", duration: 1     }
         );
 })
