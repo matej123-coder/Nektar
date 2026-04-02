@@ -207,23 +207,33 @@ document.addEventListener("DOMContentLoaded", () => {
     const svgContainer = document.querySelector(".svg-container");
 
     const targetScale = svgContainer.offsetHeight / primaryHeader.offsetHeight;
+    // Calculate the distance the top needs to travel to reach the bottom
+    const moveDistance = svgContainer.offsetHeight - primaryHeader.offsetHeight ;
+
     const svgTl = gsap.timeline({
         scrollTrigger: {
-            trigger: ".primary-header",
+            trigger: ".svg-container",
             start: "top bottom",
-            endTrigger:".svg-container" ,
             end: "bottom bottom",
             scrub: true,
-            markers: true,
+            invalidateOnRefresh: true
         }
     });
 
     svgTl
-        .fromTo(primaryHeader,
-            { scaleY: 0, transformOrigin: "top center" },
-            { scaleY: targetScale, transformOrigin: "top center", ease: "none", duration: 20 }
+        .fromTo(primaryHeaderSvg,
+            { scaleY: 0, y: 0, transformOrigin: "top center" },
+            {
+                scaleY: targetScale,
+                y: 0,
+                ease: "none",
+                duration: 20
+            }
         )
-        .to(primaryHeader,
-            { scaleY: 1, transformOrigin: "bottom center", ease: "none", duration: 1     }
-        );
+        .to(primaryHeaderSvg, {
+            scaleY: 1,
+            y: moveDistance,
+            ease: "none",
+            duration: 1  
+        });
 })
