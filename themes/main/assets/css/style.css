@@ -507,18 +507,18 @@
     }
     .svg-container{
         position: relative;
-        height: 100%;;
+        height: 1100px;
     }
     .primary-header{
         width: 100%;
         height: auto;
         padding: var(--page-padding) var(--page-padding) var(--page-padding);
        position: relative;
+
     }
     .primary-header h1{
         font-size: var(--font-size-xxl);
-    }
-
+    } 
     .primary-header svg{
         width: 100%;
         height: auto;

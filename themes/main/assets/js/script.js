@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const targetScale = svgContainer.offsetHeight / primaryHeader.offsetHeight;
     // Calculate the distance the top needs to travel to reach the bottom
     const moveDistance = svgContainer.offsetHeight - primaryHeader.offsetHeight ;
-
+    
     const svgTl = gsap.timeline({
         scrollTrigger: {
             trigger: ".svg-container",
@@ -221,16 +221,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     svgTl
-        .fromTo(primaryHeaderSvg,
-            { scaleY: 0, y: 0, transformOrigin: "top center" },
+        .fromTo(primaryHeader,
+            {scaleY:0, transformOrigin:"top center"   },
             {
-                scaleY: targetScale,
+                scaleY: targetScale ,
                 y: 0,
                 ease: "none",
-                duration: 20
+                duration: 20    
             }
         )
-        .to(primaryHeaderSvg, {
+        .to(primaryHeader, {
             scaleY: 1,
             y: moveDistance,
             ease: "none",
